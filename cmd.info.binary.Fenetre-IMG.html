@@ -1,8 +1,7 @@
 <div style="padding:0;width:90px;min-height:62px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#" data-eqLogic_id="#eqLogic_id#" data-eqLogic_id="#eqLogic_id#" title="#collectDate#">
 	<!-- Info Widget
 		Basé sur les widget de 		: Plusieurs Widget
-		Mise à jour 			: JAG 20190317 : ajout centrer widget (merci à Antoinekl1)
-	-->
+		Mise à jour 					: JAG 20190327 : Amélioration code Ajout variable pour définir l'extension du fichier (merci à fishes)	-->
 	<center>
 	<div class="row">
 		<center>
@@ -10,7 +9,7 @@
 		<div class="iconCmd#uid#"></div>
       	<!-- Historique -->
       		<div style="#displayHistory# font-weight: bold;font-size : 10px;">
-      			<span class="timeCmd#uid#"></span>
+      			<span class="timeCmd#id# timeCmd label-info" ></span>
       		</div>
 		</center>
 	</div>
@@ -21,28 +20,41 @@
               // Paramètrage du logo
   				// Valeur pour ON ou 1
       				var srcImglogoON	= ('#logoClose#'!='#'+'logoClose#') ? "#logoClose#" 	: "BaieClose";
+					var srcImglogoON_T 	= ('#logoON_type#'!='#'+'logoON_type#') ? "#logoON_type#" : "png";
   				// Valeur pour OFF ou 0
       				var srcImglogoOFF	= ('#logoOpen#'!='#'+'logoOpen#') ? "#logoOpen#" 	: "BaieOpen";
+					var srcImglogoOFF_T 	= ('#logoOFF_type#'!='#'+'logoOFF_type#') ? "#logoOFF_type#" : "png";
           		// Valeur pour aucune Valeur
-      				var srcImglogoErreur	= ('#logoErreur#'!='#'+'logoErreur#') 	? "#logoErreur#": "Fenetre_Erreur";
+      				var srcImglogoER		= ('#logo_error#'!='#'+'logo_error#') 	? "#logoErreur#": "Fenetre_Erreur";
+	  				var srcImglogoER_T 	= ('#logo_error_type#'!='#'+'logo_error_type#') ? "#logo_error_type#" : "png";
+             // Affichage durée changement dernier etat
+          			var srcImglogoTime	= ('#logoTime#'!='#'+'logoTime#') 	? "#logoTime#": "X"
              // Paramètre "sizehw" : à déclarer en pixels - 80 maxi
       				var srcImgHeight 	= (is_numeric('#sizehw#')) ? parseFloat('#sizehw#') : 80;
       				var srcImgWidth		= (is_numeric('#sizehw#')) ? parseFloat('#sizehw#') : 80;
         	// Paramétrage des images
-        			var srcImgURL 		= 'plugins/widget/core/template/dashboard/cmd.info.binary.Fenetre-IMG/';
-        			var srcImgOn 		= srcImgURL + srcImglogoON +'.png'; 	// Pour Valeur = 1
-        			var srcImgOff 		= srcImgURL + srcImglogoOFF +'.png';  	// Pour valeur = 0  
-                  	var srcImgErreur	= srcImgURL + srcImglogoErreur +'.png'; // Pour valeur = ?  
+        				var srcImgURL 		= 'plugins/widget/core/template/dashboard/cmd.info.binary.Fenetre-IMG/';
+                     	var srcImgOn 		= srcImgURL + srcImglogoON +'.'+ srcImglogoON_T; 	// Pour Valeur = 1
+                     var srcImgOff 		= srcImgURL + srcImglogoOFF +'.'+ srcImglogoOFF_T;  	// Pour valeur = 0   
+					var srcImgER 		= srcImgURL + srcImglogoER +'.'+ srcImglogoER_T; 	// Pour Valeur = ?
+                      
+
+
 			$(".iconCmd#uid#").empty();
 			if (parseInt(_options.display_value) == 1) {
 				$(".iconCmd#uid#").append('<img src="'+srcImgOn+'" style="height:' + srcImgHeight +'px;width:' + srcImgWidth +'px;">');
             } else if (parseInt(_options.display_value) == 0) {
 				$(".iconCmd#uid#").append('<img src="'+srcImgOff+'" style="height:' + srcImgHeight +'px;width:' + srcImgWidth +'px;">');
 			} else {
-				$(".iconCmd#uid#").append('<img src="'+srcImgErreur+'" style="height:' + srcImgHeight +'px;width:' + srcImgWidth +'px;">');
+				$(".iconCmd#uid#").append('<img src="'+srcImgER+'" style="height:' + srcImgHeight +'px;width:' + srcImgWidth +'px;">');
 			}
 			$('.cmd[data-cmd_id=#id#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
+			 // Derniere durée changement dernier etat
+					if (srcImglogoTime == "X") {
+  						jeedom.cmd.displayDuration(_options.valueDate, $('.cmd[data-cmd_id=#id#] .timeCmd#id#'));
+      				}
 		}
+		
       
 		jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});
 	</script>
