@@ -7,7 +7,7 @@
         <div class="cmdName" style="#hideCmdName#">#name_display#</div>
     </div>
         <div class="content-sm ">
-            <span class="iconCmd#id#"></span>
+            <span class="iconCmd#uid#"></span>
     </div>
     <div style="font-weight: bold;font-size : 10px;">
         <span class="timeCmd#id# timeCmd label label-default value"></span>
@@ -38,11 +38,11 @@
                 var srcImgPath;
         
         if (_options.display_value == '1') {
-            $('.cmd[data-cmd_id=#id#] .iconCmd#id#').empty().append('<img src="'+srcImgOn+'" '+srcImgSize+'>');
+            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgOn+'" '+srcImgSize+'>');
         }else if (_options.display_value == '0') {
-            $('.cmd[data-cmd_id=#id#] .iconCmd#id#').empty().append('<img src="'+srcImgOff+'" '+srcImgSize+'>');
+            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgOff+'" '+srcImgSize+'>');
         }else {
-            $('.cmd[data-cmd_id=#id#] .iconCmd#id#').empty().append('<img src="'+srcImgError+'" '+srcImgSize+'>');
+            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgError+'" '+srcImgSize+'>');
         }
       
 		// Derniere durée changement dernier etat
