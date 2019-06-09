@@ -1,7 +1,7 @@
 <div style="padding:0;width:90px;min-height:62px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#" data-eqLogic_id="#eqLogic_id#" data-eqLogic_id="#eqLogic_id#" title="#collectDate#">
     <!-- Info Widget
             Basé sur les widget de 		: Plusieurs Widget
-            Mise à jour 				: JAG 20190327 : Amélioration code Ajout variable pour définir l'extension du fichier (merci à fishes)	
+            Mise à jour 				: JAG 20190609 : Correction Bug variable
     -->
     <div class="title #hide_name#">
         <div class="cmdName" style="#hideCmdName#">#name_display#</div>
@@ -30,19 +30,16 @@
                 var srcImgSize 		= 'height='+srcImgHeight+'px width='+srcImgWidth+'px';
 		// Paramétrage des images
                 var srcImgURL 		= 'plugins/widget/core/template/dashboard/cmd.info.binary.Fenetre-IMG/';
-                var srcImgOn 		= srcImgURL +srcImglogoON+"."+srcImglogoON_T;        // Pour Valeur = 1
-                var srcImgOff 		= srcImgURL +srcImglogoOFF+"."+srcImglogoOFF_T;     //  Pour valeur = 0
-                var srcImgError 	= srcImgURL +srcImglogoER+"."+srcImglogoER_T;      //  Pour valeur = Erreur
 		// Affichage durée changement dernier etat
                 var srcImglogoTime  = '#logoTime#';
                 var srcImgPath;
         
         if (_options.display_value == '1') {
-            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgOn+'" '+srcImgSize+'>');
+            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgURL +srcImglogoON +'.'+ srcImglogoON_T+'" '+srcImgSize+'>');
         }else if (_options.display_value == '0') {
-            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgOff+'" '+srcImgSize+'>');
+            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgURL +srcImglogoOFF +'.'+ srcImglogoOFF_T+'" '+srcImgSize+'>');
         }else {
-            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgError+'" '+srcImgSize+'>');
+            $('.cmd[data-cmd_id=#id#] .iconCmd#uid#').empty().append('<img src="'+srcImgURL +srcImglogoER +'.'+ srcImglogoER_T+'" '+srcImgSize+'>');
         }
       
 		// Derniere durée changement dernier etat
